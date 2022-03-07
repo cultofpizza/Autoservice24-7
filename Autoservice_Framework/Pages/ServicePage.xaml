@@ -1,0 +1,109 @@
+﻿<Page x:Class="Autoservice_Framework.Pages.ServicePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Autoservice_Framework"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ServicePage">
+
+    <Grid>
+        <Border CornerRadius="0"
+                Margin="10 0 0 0">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="60" />
+
+                </Grid.RowDefinitions>
+
+
+                <Grid Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel VerticalAlignment="Center" Margin="5 0"/>
+                    </StackPanel>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel VerticalAlignment="Center" Margin="5 0">
+                            <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Название"/>
+                            <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterTitle" TextChanged="filters_TextChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5 0">
+                            <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Описание"/>
+                            <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterDesc" TextChanged="filters_TextChanged"/>
+                        </StackPanel>
+                        
+                        <StackPanel VerticalAlignment="Center" Margin="5 0" Grid.Row="1">
+                            <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Мин. цена"/>
+                            <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterMinPrice" TextChanged="filters_TextChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5 0">
+                            <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Макс. цена"/>
+                            <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterMaxPrice" TextChanged="filters_TextChanged"/>
+                        </StackPanel>
+
+                        <!--<StackPanel VerticalAlignment="Center" Margin="5 0" Grid.Row="1">
+                            <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Производитель"/>
+                            <ComboBox Style="{DynamicResource CustomComboBoxStyle}" x:Name="filterManufacturer" FontFamily="TW Cen MT"/>
+                        </StackPanel>
+
+                        <StackPanel VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="1">
+                            <TextBlock Foreground="#393a3c"  Text="Производитель"/>
+                            <CheckBox Foreground="#393a3c" FontFamily="Cascadia Mono"  x:Name="filterIsActive" IsChecked="False" Content="Статус товара - активен"/>
+                        </StackPanel>-->
+
+                        <Button Margin="10" x:Name="clearFilters" Content="Очистить фильтры" Grid.Row="0" Grid.Column="2"
+                        Style="{DynamicResource CustomButtonStyle}" Click="clearFilters_Click"/>
+
+                    </Grid>
+                </Grid>
+
+                <ListView Grid.Row="1" x:Name="LvService" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="5"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Height="60" Width="160" Orientation="Vertical">
+                                <TextBlock TextAlignment="Center" Width="130" Text="{Binding Title}"  HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Price}" HorizontalAlignment="Center"/>
+
+                                <TextBlock Text="{Binding Description}" FontSize="10" HorizontalAlignment="Center" AllowDrop="True"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid Grid.Row="2" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="addProduct" Margin="0 10" Content="Добавить товар" Style="{DynamicResource CustomButtonStyle}" Click="addProduct_Click" />
+                    <Button x:Name="editProduct" Margin="10" Grid.Column="1" Content="Изменить товар" Style="{DynamicResource CustomButtonStyle}" Click="editProduct_Click" />
+                    <Button x:Name="deleteProduct" Grid.Column="2" Margin="0 10" Content="Удалить товар" Style="{DynamicResource CustomButtonStyle}" Click="deleteProduct_Click"/>
+                </Grid>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Page>
