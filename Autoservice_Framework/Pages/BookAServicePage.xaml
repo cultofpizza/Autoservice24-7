@@ -5,10 +5,135 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Autoservice_Framework.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="600"
       Title="BookAServicePage">
 
-    <Grid>
-        
+    <Grid Background="{StaticResource CustomColor.Green}" Margin="10 0 0 0">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="14" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Margin="5 0" Text="Выберите Клиента:" FontFamily="Cascadia Mono" Foreground="{StaticResource CustomColor.Black}"/>
+
+                <ListView Margin="5" Grid.Row="1" x:Name="LvClient" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Cascadia Mono">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Height="60" Width="160" Orientation="Horizontal">
+                                <TextBlock Width="140" TextAlignment="Center" Text="{Binding Title}"  HorizontalAlignment="Center"/>
+                                <TextBlock Width="100" Text="{Binding Price}" HorizontalAlignment="Center"/>
+                                <TextBlock Width="100" Text="{Binding Description}" FontSize="10" HorizontalAlignment="Center" AllowDrop="True"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="14" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Margin="5 0" Text="Выберите вид техобслуживания:" FontFamily="Cascadia Mono" Foreground="{StaticResource CustomColor.Black}"/>
+
+                <ListView Margin="5" Grid.Row="1" x:Name="LvService" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Cascadia Mono">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Column="0" Text="{Binding Title}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Description}" AllowDrop="True"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Price}"/>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <StackPanel Grid.Column="1">
+
+
+                <StackPanel VerticalAlignment="Top" Margin="5">
+                    <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Фамилия"/>
+                    <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterLname" TextChanged="filterLname_TextChanged"/>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Top" Margin="5">
+                    <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Имя"/>
+                    <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterFname" TextChanged="filterFname_TextChanged"/>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Top" Margin="5">
+                    <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Отчество"/>
+                    <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterMname" TextChanged="filterMname_TextChanged"/>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Top" Margin="5">
+                    <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Номер телефона"/>
+                    <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterPhone" TextChanged="filterPhone_TextChanged"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <StackPanel VerticalAlignment="Center" Margin="5">
+                        <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Название"/>
+                        <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterTitle" TextChanged="filterTitle_TextChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5">
+                        <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Описание"/>
+                        <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterDesc" TextChanged="filterDesc_TextChanged"/>
+                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel VerticalAlignment="Center" Margin="5" Grid.Column="0">
+                            <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Мин. цена"/>
+                            <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterMinPrice" TextChanged="filterMinPrice_TextChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5 0">
+                            <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Макс. цена"/>
+                            <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterMaxPrice" TextChanged="filterMaxPrice_TextChanged"/>
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+
+                <Button x:Name="makeOrder" Click="makeOrder_Click" Grid.Row="1" 
+                        Content="Заказать техобслуживание" Style="{StaticResource CustomButtonStyle}" Margin="5"/>
+            </Grid>
+
+        </Grid>
     </Grid>
 </Page>

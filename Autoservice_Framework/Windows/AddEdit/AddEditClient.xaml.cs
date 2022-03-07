@@ -16,44 +16,45 @@ using System.Windows.Shapes;
 namespace Autoservice_Framework
 {
     /// <summary>
-    /// Логика взаимодействия для AddEditService.xaml
+    /// Interaction logic for AddEditClient.xaml
     /// </summary>
-    public partial class AddEditService : Window
+    public partial class AddEditClient : Window
     {
-        Service service;
+        Client client;
         bool isEditing = false;
-
-        public AddEditService()
+        public AddEditClient()
         {
             InitializeComponent();
         }
 
-        public AddEditService(int id):this()
+
+        public AddEditClient(int id) : this()
         {
             isEditing = true;
-            Title = "Изменение услуги";
+            Title = "Изменение данных Клиента";
 
-            service = Data.Entities.Service.Where(i => i.Id == id).FirstOrDefault();
+            client = Data.Entities.Client.Where(i => i.Id == id).FirstOrDefault();
 
-            titleBox.Text = service.Title;
-            descriptionBox.Text = service.Description;
-            priceBox.Text = service.Price.ToString();
+            lastNameBox.Text = client.LastName;
+            firstNameBox.Text = client.FirstName;
+            middleNameBox.Text = client.MiddleName;
+            phoneBox.Text = client.phone;
         }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
             if (isEditing)
             {
-                if (titleBox.Text.Length > 0 &&
-                priceBox.Text.Length > 0)
+                if (lastNameBox.Text.Length > 0 &&
+                firstNameBox.Text.Length > 0 &&
+                phoneBox.Text.Length > 0)
                 {
                     if (System.Windows.Forms.MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                     {
-                        service.Title = titleBox.Text;
-                        service.Price = Convert.ToDecimal(priceBox.Text);
-                        service.Description = descriptionBox.Text;
-
-
+                        client.LastName = lastNameBox.Text;
+                        client.FirstName = firstNameBox.Text;
+                        client.MiddleName = middleNameBox.Text;
+                        client.phone = phoneBox.Text;
 
                         Data.Entities.SaveChanges();
                         Close();
@@ -67,23 +68,25 @@ namespace Autoservice_Framework
             }
             else
             {
-                if (titleBox.Text.Length > 0 &&
-               priceBox.Text.Length > 0)
+                if (lastNameBox.Text.Length > 0 &&
+                firstNameBox.Text.Length > 0 &&
+                phoneBox.Text.Length > 0)
                 {
                     if (System.Windows.Forms.MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                     {
 
-                        var service = new Service()
+                        var client = new Client()
                         {
-                            Title = titleBox.Text,
-                            Price = Convert.ToDecimal(priceBox.Text),
-                            Description = descriptionBox.Text
+                            LastName = lastNameBox.Text,
+                            FirstName = firstNameBox.Text,
+                            MiddleName = middleNameBox.Text,
+                            phone = phoneBox.Text
                         };
 
-                        Data.Entities.Service.Add(service);
+                        Data.Entities.Client.Add(client);
                         Data.Entities.SaveChanges();
                         Close();
-                        System.Windows.Forms.MessageBox.Show("New service added succesfully!", "Congratulations!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        System.Windows.Forms.MessageBox.Show("New client added succesfully!", "Congratulations!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
                 }

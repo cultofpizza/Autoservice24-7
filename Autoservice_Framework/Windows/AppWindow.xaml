@@ -24,7 +24,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Image Source="Images/servicelogo.png" Grid.Row="0"/>
+                    <Image Source="/Images/servicelogo.png" Grid.Row="0"/>
 
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
@@ -34,8 +34,8 @@
                         </Grid.RowDefinitions>
 
                         <Button Click="servicesPageButton_Click" Content="Услуги" Margin="5" Style="{StaticResource CustomButtonStyle}" Grid.Row="0"/>
-                        <Button Content="Клиенты" Margin="5" Style="{StaticResource CustomButtonStyle}" Grid.Row="1"/>
-                        <Button Content="Оформить" Margin="5" Style="{StaticResource CustomButtonStyle}" Grid.Row="2"/>
+                        <Button Click="clientsPageButton_Click" Content="Клиенты" Margin="5" Style="{StaticResource CustomButtonStyle}" Grid.Row="1"/>
+                        <Button Click="orderPageButton_Click" Content="Оформить" Margin="5" Style="{StaticResource CustomButtonStyle}" Grid.Row="2"/>
                     </Grid>
 
                     <Grid Grid.Row="3">

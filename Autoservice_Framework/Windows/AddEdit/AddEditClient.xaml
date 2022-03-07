@@ -1,0 +1,54 @@
+﻿<Window x:Class="Autoservice_Framework.AddEditClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Autoservice_Framework"
+        mc:Ignorable="d"
+        Title="AddEditClient" Height="500" Width="400">
+    <Grid Background="{StaticResource CustomColor.White}">
+        <Border CornerRadius="10" Margin="10" Background="{StaticResource CustomColor.Green}">
+            <Grid Margin="80 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="/Images/servicelogo.png"/>
+
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Фамилия" FontFamily="Cascadia Mono"
+                               Foreground="{StaticResource CustomColor.White}"/>
+                    <TextBox x:Name="lastNameBox" Style="{StaticResource CustomTextBoxStyle}" FontSize="18"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="Имя" FontFamily="Cascadia Mono"
+                               Foreground="{StaticResource CustomColor.White}"/>
+                    <TextBox x:Name="firstNameBox" Style="{StaticResource CustomTextBoxStyle}" FontSize="18"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Отчество" FontFamily="Cascadia Mono"
+                               Foreground="{StaticResource CustomColor.White}"/>
+                    <TextBox x:Name="middleNameBox" Style="{StaticResource CustomTextBoxStyle}" FontSize="18"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="4">
+                    <TextBlock Text="Номер телефона" FontFamily="Cascadia Mono"
+                               Foreground="{StaticResource CustomColor.White}"/>
+                    <TextBox x:Name="phoneBox" Style="{StaticResource CustomTextBoxStyle}" FontSize="18"/>
+                </StackPanel>
+
+                <Button x:Name="confirmButton" Style="{StaticResource CustomButtonStyle}" Grid.Row="5" Margin="30 5" Content="Подтвердить" Click="confirmButton_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -16,90 +16,103 @@ using System.Windows.Shapes;
 namespace Autoservice_Framework.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ServicePage.xaml
+    /// Логика взаимодействия для UserPage.xaml
     /// </summary>
-    public partial class ServicePage : Page
+    public partial class ClientPage : Page
     {
-        public ServicePage()
+        public ClientPage()
         {
             InitializeComponent();
-            LvService.ItemsSource = Data.Entities.Service.ToList();
-        }
 
+            LvClient.ItemsSource = Data.Entities.Client.ToList();
+        }
         private void Filter()
         {
             Data.Entities = new VitalInstrumentalDBEntities();
 
-            decimal min, max;
-            if (filterMinPrice.Text != "") min = Convert.ToDecimal(filterMinPrice.Text);
-            else min = 0;
-            if (filterMaxPrice.Text != "") max = Convert.ToDecimal(filterMaxPrice.Text);
-            else max = decimal.MaxValue;
+            List<Client> clients = new List<Client>();
 
-            List<Service> services = new List<Service>();
-
-            services = Data.Entities.Service
-                .Where(i => i.Title.Contains(filterTitle.Text))
-                .Where(i => i.Description.Contains(filterDesc.Text))
-                .Where(i => i.Price > min && i.Price < max)
+            clients = Data.Entities.Client
+                .Where(i => i.LastName.Contains(filterLname.Text))
+                .Where(i => i.FirstName.Contains(filterFname.Text))
+                .Where(i => i.MiddleName.Contains(filterMname.Text))
+                .Where(i => i.phone.Contains(filterPhone.Text))
                 .ToList();
 
-            LvService.ItemsSource= services;
+            LvClient.ItemsSource = clients;
         }
 
-        private void filters_TextChanged(object sender, TextChangedEventArgs e)
+        private void filterLname_TextChanged(object sender, TextChangedEventArgs e)
         {
             Filter();
         }
 
-        private void addProduct_Click(object sender, RoutedEventArgs e)
+        private void filterFname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var window = new AddEditService();
+            Filter();
+        }
+
+        private void filterMname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void filterPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void addClient_Click(object sender, RoutedEventArgs e)
+        {
+            var client = (Client)LvClient.SelectedItem;
+
+
+            var window = new AddEditClient();
             window.ShowDialog();
             Filter();
         }
 
-        private void editProduct_Click(object sender, RoutedEventArgs e)
+        private void editClient_Click(object sender, RoutedEventArgs e)
         {
-            if (LvService.SelectedItems.Count == 0)
+            if (LvClient.SelectedItems.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("You haven't select any row", "Service editing", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Hand);
                 return;
             }
 
-            var service = (Service)LvService.SelectedItem;
+            var client = (Client)LvClient.SelectedItem;
 
 
-            var window = new AddEditService(service.Id);
+            var window = new AddEditClient();
             window.ShowDialog();
             Filter();
         }
 
-        private void deleteProduct_Click(object sender, RoutedEventArgs e)
+        private void deleteClient_Click(object sender, RoutedEventArgs e)
         {
-            if (LvService.SelectedItems.Count == 0)
+            if (LvClient.SelectedItems.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("You haven't select any row", "Service deleting", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Hand);
                 return;
             }
 
-            if (System.Windows.Forms.MessageBox.Show($"Are you sure you want to delete {LvService.SelectedItems.Count} row(s)?",
+            if (System.Windows.Forms.MessageBox.Show($"Are you sure you want to delete {LvClient.SelectedItems.Count} row(s)?",
                 "Confirmation",
                 System.Windows.Forms.MessageBoxButtons.YesNo,
                 System.Windows.Forms.MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                 return;
 
-            int services = LvService.SelectedItems.Count;
+            int services = LvClient.SelectedItems.Count;
             int valid = 0;
 
-            foreach (Service service in LvService.SelectedItems)
+            foreach (Client client in LvClient.SelectedItems)
             {
-                if (Data.Entities.ClientService.Where(i => i.IdService == service.Id).Count() > 0)
+                if (Data.Entities.ClientService.Where(i => i.IdService == client.Id).Count() > 0)
                 {
                     continue;
                 }
 
-                Data.Entities.Service.Remove(service);
+                Data.Entities.Client.Remove(client);
                 valid++;
             }
 
@@ -116,10 +129,11 @@ namespace Autoservice_Framework.Pages
 
         private void clearFilters_Click(object sender, RoutedEventArgs e)
         {
-            filterMaxPrice.Text = "";
-            filterMinPrice.Text = "";
-            filterDesc.Text = "";
-            filterTitle.Text = "";
+            filterLname.Text = "";
+            filterFname.Text = "";
+            filterMname.Text = "";
+            filterPhone.Text = "";
+
             Filter();
         }
     }

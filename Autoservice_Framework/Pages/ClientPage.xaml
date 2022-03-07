@@ -1,0 +1,113 @@
+﻿<Page x:Class="Autoservice_Framework.Pages.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Autoservice_Framework.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserPage">
+
+
+    <Grid Background="{StaticResource CustomColor.Green}">
+
+        <Grid>
+            <Border CornerRadius="0"
+                Margin="10 0 0 0">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="60" />
+
+                    </Grid.RowDefinitions>
+
+
+                    <Grid Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel VerticalAlignment="Center" Margin="5 0"/>
+                        </StackPanel>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel VerticalAlignment="Center" Margin="5 0">
+                                <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Фамилия"/>
+                                <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterLname" TextChanged="filterLname_TextChanged"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5 0">
+                                <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Имя"/>
+                                <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterFname" TextChanged="filterFname_TextChanged"/>
+                            </StackPanel>
+                            
+                            <StackPanel VerticalAlignment="Center" Margin="5 0" Grid.Row="1">
+                                <TextBlock FontFamily="Cascadia Mono" Foreground="#393a3c" Text="Отчество"/>
+                                <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterMname" TextChanged="filterMname_TextChanged"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="5 0">
+                                <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Номер телефона"/>
+                                <TextBox Style="{StaticResource CustomTextBoxStyle}" x:Name="filterPhone" TextChanged="filterPhone_TextChanged"/>
+                            </StackPanel>
+
+                            <!--<StackPanel VerticalAlignment="Center" Margin="5 0" Grid.Row="1">
+                            <TextBlock Foreground="#393a3c"  FontFamily="Cascadia Mono" Text="Производитель"/>
+                            <ComboBox Style="{DynamicResource CustomComboBoxStyle}" x:Name="filterManufacturer" FontFamily="TW Cen MT"/>
+                        </StackPanel>
+
+                        <StackPanel VerticalAlignment="Center" Margin="5 0" Grid.Row="1" Grid.Column="1">
+                            <TextBlock Foreground="#393a3c"  Text="Производитель"/>
+                            <CheckBox Foreground="#393a3c" FontFamily="Cascadia Mono"  x:Name="filterIsActive" IsChecked="False" Content="Статус товара - активен"/>
+                        </StackPanel>-->
+
+                            <Button Margin="10" x:Name="clearFilters" Content="Очистить фильтры" Grid.Row="0" Grid.Column="2"
+                        Style="{DynamicResource CustomButtonStyle}" Click="clearFilters_Click"/>
+
+                        </Grid>
+                    </Grid>
+
+                    <ListView Grid.Row="1" x:Name="LvClient" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Cascadia Mono">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Margin="5"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Height="60" Width="220" Orientation="Vertical">
+                                    <TextBlock TextAlignment="Center" Width="200" Text="{Binding LastName}"  HorizontalAlignment="Center"/>
+                                    <TextBlock TextAlignment="Center" Width="200" Text="{Binding FirstName}"  HorizontalAlignment="Center"/>
+                                    <TextBlock TextAlignment="Center" Width="200" Text="{Binding MiddleName}"  HorizontalAlignment="Center"/>
+                                    <TextBlock TextAlignment="Center" Width="200" Text="{Binding phone}"  HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Grid.Row="2" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="addClient" Margin="0 10" Content="Добавить данные Клиента" Style="{DynamicResource CustomButtonStyle}" Click="addClient_Click" />
+                        <Button x:Name="editClient" Margin="10" Grid.Column="1" Content="Изменить данные Клиента" Style="{DynamicResource CustomButtonStyle}" Click="editClient_Click" />
+                        <Button x:Name="deleteClient" Grid.Column="2" Margin="0 10" Content="Удалить данные Клиента" Style="{DynamicResource CustomButtonStyle}" Click="deleteClient_Click"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+</Page>

@@ -21,6 +21,7 @@ namespace Autoservice_Framework
     public partial class AppWindow : Window
     {
         Employee employee;
+
         VitalInstrumentalDBEntities entities = new VitalInstrumentalDBEntities();
         public AppWindow(int userId)
         {
@@ -41,17 +42,24 @@ namespace Autoservice_Framework
         }
         private void clientsPageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mainFrame.Content = null;
+            mainFrame.Navigate(new ClientPage());
         }
         private void orderPageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mainFrame.Content = null;
+            mainFrame.Navigate(new BookAServicePage(employee));
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
             Closed -= Window_Closed;
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

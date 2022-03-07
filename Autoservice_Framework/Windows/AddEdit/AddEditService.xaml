@@ -19,9 +19,9 @@
                     <RowDefinition Height="2*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="Images/servicelogo.png"/>
+                <Image Grid.Row="0" Source="/Images/servicelogo.png"/>
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Название" FontFamily="Cascadia Mono"
@@ -41,7 +41,7 @@
                     <TextBox x:Name="priceBox" Style="{StaticResource CustomTextBoxStyle}" FontSize="18"/>
                 </StackPanel>
 
-                <Button x:Name="confirmButton" Style="{StaticResource CustomButtonStyle}" Grid.Row="5" Margin="30 10" Content="Подтвердить" Click="confirmButton_Click"/>
+                <Button x:Name="confirmButton" Style="{StaticResource CustomButtonStyle}" Grid.Row="5" Margin="30 5" Content="Подтвердить" Click="confirmButton_Click"/>
             </Grid>
         </Border>
     </Grid>
